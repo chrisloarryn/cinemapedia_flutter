@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 Future<void> main() async {
   await dotenv.load(fileName: '.env');
+  print(dotenv.env['THE_MOVIEDB_KEY']);
   runApp(
     const ProviderScope(child: MainApp()),
   );
