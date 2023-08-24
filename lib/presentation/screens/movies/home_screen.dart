@@ -1,8 +1,8 @@
-import 'package:cinemapedia_flutter/presentation/providers/movies/movies_provider.dart';
-import 'package:cinemapedia_flutter/presentation/providers/movies/movies_slideshow_provider.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:cinemapedia_flutter/presentation/providers/movies/movies_slideshow_provider.dart';
+import 'package:cinemapedia_flutter/presentation/providers/movies/movies_provider.dart';
 import 'package:cinemapedia_flutter/presentation/widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -13,7 +13,9 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: _HomeView(), bottomNavigationBar: const CustomBottomNavigation());
+      body: _HomeView(),
+      bottomNavigationBar: const CustomBottomNavigation(),
+    );
   }
 }
 
@@ -40,6 +42,12 @@ class _HomeViewState extends ConsumerState<_HomeView> {
         const CustomAppbar(),
         // const SizedBox(height: 50),
         MoviesSlideshow(movies: slideShowMovies),
+
+        MovieHorizantalListview(
+          movies: nowPlayingMovies,
+          title: 'Now Playing',
+          subTitle: 'Popular movies',
+        ),
       ],
     );
   }

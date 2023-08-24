@@ -1,6 +1,7 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class Environment {
-  // static String theMovieDbKey = dotenv.env['THE_MOVIEDB_KEY'] ?? 'no-key';
-  static String theMovieDbKey = dotenv.env['THE_MOVIEDB_KEY'] ?? 'no-key';
+  // 'no-key';
+  static String theMovieDbKey =
+      dotenv.env['THE_MOVIEDB_KEY'] ?? '4631cecccf3cf39dcaac0181723e12af';
 }

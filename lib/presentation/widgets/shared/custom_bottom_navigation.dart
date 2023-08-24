@@ -5,11 +5,19 @@ class CustomBottomNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(items: [
-      BottomNavigationBarItem(icon: Icon(Icons.home_max), label: 'Home'),
-      BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
-      BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Favorite'),
-      BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-    ]);
+    final colors = Theme.of(context).colorScheme;
+    return BottomNavigationBar(
+      items: [
+        BottomNavigationBarItem(icon: Icon(Icons.home_max), label: 'Home'),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.label_outline), label: 'Search'),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.favorite_outline), label: 'Favorite'),
+        BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+      ],
+      fixedColor: colors.primary,
+      unselectedItemColor: colors.onBackground,
+      showUnselectedLabels: true,
+    );
   }
 }
