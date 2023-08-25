@@ -4,7 +4,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:cinemapedia_flutter/config/helpers/human_formats.dart';
 import 'package:cinemapedia_flutter/domain/entities/movie.dart';
 
-class MovieHorizantalListview extends StatelessWidget {
+class MovieHorizantalListview extends StatefulWidget {
   final List<Movie> movies;
   final String? title;
   final String? subTitle;
@@ -19,19 +19,50 @@ class MovieHorizantalListview extends StatelessWidget {
   });
 
   @override
+  State<MovieHorizantalListview> createState() =>
+      _MovieHorizantalListviewState();
+}
+
+class _MovieHorizantalListviewState extends State<MovieHorizantalListview> {
+  final ScrollController _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _scrollController.addListener(() {
+      if (widget.loadNextPage == null) return;
+
+      if (_scrollController.position.pixels + 200 >=
+          _scrollController.position.maxScrollExtent) {
+        widget.loadNextPage!();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 370,
       child: Column(
         children: [
-          if (title != null || subTitle != null)
-            _Title(title: title, subTitle: subTitle),
+          if (widget.title != null || widget.subTitle != null)
+            _Title(title: widget.title, subTitle: widget.subTitle),
           Expanded(
             child: ListView.builder(
-              itemCount: movies.length,
+              controller: _scrollController,
+              itemCount: widget.movies.length,
               scrollDirection: Axis.horizontal,
               physics: const BouncingScrollPhysics(),
-              itemBuilder: (context, index) => _Slide(movie: movies[index]),
+              itemBuilder: (context, index) =>
+                  _Slide(movie: widget.movies[index]),
             ),
           ),
         ],

@@ -37,17 +37,55 @@ class _HomeViewState extends ConsumerState<_HomeView> {
   Widget build(BuildContext context) {
     final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider);
     final slideShowMovies = ref.watch(moviesSlideshowProvider);
-    return Column(
-      children: [
-        const CustomAppbar(),
-        // const SizedBox(height: 50),
-        MoviesSlideshow(movies: slideShowMovies),
-
-        MovieHorizantalListview(
-          movies: nowPlayingMovies,
-          title: 'Now Playing',
-          subTitle: 'Popular movies',
+    return CustomScrollView(
+      slivers: [
+        const SliverAppBar(
+          floating: true,
+          flexibleSpace: FlexibleSpaceBar(
+            title: CustomAppbar(),
+          ),
         ),
+        SliverList(
+            delegate: SliverChildBuilderDelegate((context, index) {
+          return Column(
+            children: [
+              MoviesSlideshow(movies: slideShowMovies),
+              MovieHorizantalListview(
+                movies: nowPlayingMovies,
+                title: 'Now Playing',
+                subTitle: 'Popular movies',
+                loadNextPage: () {
+                  ref.read(nowPlayingMoviesProvider.notifier).loadNextPage();
+                },
+              ),
+              MovieHorizantalListview(
+                movies: nowPlayingMovies,
+                title: 'Soon',
+                subTitle: 'Upcoming movies',
+                loadNextPage: () {
+                  ref.read(nowPlayingMoviesProvider.notifier).loadNextPage();
+                },
+              ),
+              MovieHorizantalListview(
+                movies: nowPlayingMovies,
+                title: 'Popular movies',
+                subTitle: 'Popular movies',
+                loadNextPage: () {
+                  ref.read(nowPlayingMoviesProvider.notifier).loadNextPage();
+                },
+              ),
+              MovieHorizantalListview(
+                movies: nowPlayingMovies,
+                title: 'Top Rated',
+                subTitle: 'Top Rated movies',
+                loadNextPage: () {
+                  ref.read(nowPlayingMoviesProvider.notifier).loadNextPage();
+                },
+              ),
+              const SizedBox(height: 20),
+            ],
+          );
+        }, childCount: 10))
       ],
     );
   }

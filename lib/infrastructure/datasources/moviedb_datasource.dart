@@ -16,8 +16,6 @@ class MoviedbDatasource extends MoviesDatasource {
 
   @override
   Future<List<Movie>> getNowPlaying({int page = 1}) async {
-    var opts = dio.options;
-
     final response = await dio.get('/movie/now_playing', queryParameters: {
       'page': page,
     });
