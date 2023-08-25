@@ -7,13 +7,13 @@ class CustomBottomNavigation extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     return BottomNavigationBar(
-      items: [
+      items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home_max), label: 'Home'),
         BottomNavigationBarItem(
             icon: Icon(Icons.label_outline), label: 'Search'),
         BottomNavigationBarItem(
             icon: Icon(Icons.favorite_outline), label: 'Favorite'),
-        BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+        // BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
       ],
       fixedColor: colors.primary,
       unselectedItemColor: colors.onBackground,
